@@ -3,9 +3,9 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 # Replace '<password>' with your actual password
-client = MongoClient("mongodb+srv://morsewallace254:<password>@cluster0.isxlant.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-db = client["your_database_name"]
-collection = db["your_collection_name"]
+client = MongoClient("mongodb+srv://morsewallace254:whoami@cluster0.5pxkesk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+db = client["dreamteam"]
+collection = db["dreamteam_collection"]
 
 @app.route('/add', methods=['POST'])
 def add_item():
