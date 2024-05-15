@@ -14,4 +14,4 @@ def add_item():
     return 'Item added successfully!', 200
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
