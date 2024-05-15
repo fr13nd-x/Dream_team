@@ -1,5 +1,14 @@
 from flask import Flask, render_template, request
 from pymongo import MongoClient
+import logging
+import ssl
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG)
+# Enable SSL debugging
+ssl_logger = logging.getLogger('ssl')
+ssl_logger.setLevel(logging.DEBUG)
+
 
 app = Flask(__name__)
 # Replace '<password>' with your actual password
@@ -13,10 +22,16 @@ def index():
 
 @app.route('/add', methods=['POST'])
 def add_item():
-    if request.method == 'POST':
-        data = request.form.get('data')
-        collection.insert_one({'data': data})
-        return 'Item added successfully!', 200
+    try:
+        if request.method == 'POST':
+            data = request.form.get('data')
+            logging.debug(f"Received data: {data}")
+            collection.insert_one({'data': data})
+            logging.info("Item added successfully!")
+            return 'Item added successfully!', 200
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        return 'Internal Server Error', 500
 
 if __name__ == '__main__':
     app.run()
